@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	 	<meta charset="utf-8">
+		<script src="http://code.jquery.com/jquery-latest.js"></script>
+		<link rel="stylesheet" href="http://code.jquery.com/qunit/git/qunit.css" type="text/css" media="screen" />
+		<script type="text/javascript" src="http://code.jquery.com/qunit/git/qunit.js"></script>							
+		<script src="../../js/chatBuilderDAO.js"></script>
+		<script src="chatBuilderDAOTestsData.js"></script>	
+		<script>
+		window.onload = function() {
+																
+			//--ACTOR----------------------------------------------------------------------------------
+			
+			test("getActors", function() {
+				var actors = [{id:1, name:"John"}, {id:1, name:"Emily"}];
+				ChatBuilderDAO.init();
+				var data = ChatBuilderDAO.getData();
+				data.actors = actors;
+				ChatBuilderDAO.setData( data );
+				
+				deepEqual( ChatBuilderDAO.getActors(), actors);										
+			});
+						
+			test("getActor", function() {
+				var actors = [{id:1, name:"John"}, {id:2, name:"Emily"}];
+				ChatBuilderDAO.init();
+				var data = ChatBuilderDAO.getData();
+				data.actors = actors;
+				ChatBuilderDAO.setData( data );
+				
+				deepEqual( ChatBuilderDAO.getActor(2), actors[1]);										
+			});
+			
+			test("inserOrUpdateActor", function() {
+				var actor = {id:1, name:"John"};			
+				ChatBuilderDAO.init();
+				ChatBuilderDAO.inserOrUpdateActor( actor );				
+				deepEqual( ChatBuilderDAO.getActors()[0], actor);	
+				
+				actor.name = "Linus"
+				ChatBuilderDAO.inserOrUpdateActor( actor );	
+				deepEqual( ChatBuilderDAO.getActors()[0], actor);								
+			});
+															
+			test("removeActor", function() {
+				var actor = {id:1, name:"John"};
+				ChatBuilderDAO.init();
+				var data = ChatBuilderDAO.getData();
+				data.actors = [actor];	
+				ChatBuilderDAO.setData( data );
+				deepEqual( ChatBuilderDAO.getActors(), [actor]);
+				
+				deepEqual( ChatBuilderDAO.removeActor(1), actor);
+				deepEqual( ChatBuilderDAO.getActors(), []);				
+			});
+			
+			//--DIALOG----------------------------------------------------------------------------------
+			
+			test("getDialogues", function() {
+				var dialogues = [{id:1, dialogText:"abc"}, {id:2, dialogText:"def"}];
+				ChatBuilderDAO.init();
+				var data = ChatBuilderDAO.getData();
+				data.dialogues = dialogues;
+				ChatBuilderDAO.setData( data );
+				
+				deepEqual( ChatBuilderDAO.getDialogues(), dialogues);										
+			});
+			
+			test("inserOrUpdateDialog", function() {
+				var dialog = {id:1, dialogText:"abc"};			
+				ChatBuilderDAO.init();
+				ChatBuilderDAO.inserOrUpdateDialog( dialog );				
+				deepEqual( ChatBuilderDAO.getDialogues()[0], dialog);	
+				
+				dialog.dialogText = "xyz"
+				ChatBuilderDAO.inserOrUpdateDialog( dialog );	
+				deepEqual( ChatBuilderDAO.getDialogues()[0], dialog);								
+			});
+			
+			test("getDialogue", function() {
+				var dialogues = [{id:1, dialogText:"abc"}, {id:2, dialogText:"def"}];
+				ChatBuilderDAO.init();
+				var data = ChatBuilderDAO.getData();
+				data.dialogues = dialogues;
+				ChatBuilderDAO.setData( data );
+				
+				deepEqual( ChatBuilderDAO.getDialogue(2), dialogues[1]);										
+			});
+			
+			test("removeDialogue", function() {
+				var dialogue = {id:1, dialogText:"abc"};
+				ChatBuilderDAO.init();
+				var data = ChatBuilderDAO.getData();
+				data.dialogues = [dialogue];	
+				ChatBuilderDAO.setData( data );
+				deepEqual( ChatBuilderDAO.getDialogues(), [dialogue]);
+				
+				deepEqual( ChatBuilderDAO.removeDialogue(1), dialogue);
+				deepEqual( ChatBuilderDAO.getDialogues(), []);										
+			});
+			
+			
+			//--GENERAL----------------------------------------------------------------------------------
+			
+			test("init", function() {					
+				ChatBuilderDAO.init();
+				
+				localStorage.removeItem( s.DATA_KEY );
+				equal( localStorage.getItem( s.DATA_KEY ), null);
+				
+				ChatBuilderDAO.init();																							
+				deepEqual( JSON.parse(localStorage.getItem( s.DATA_KEY )), s.BOOT_DATA);												
+			});
+			
+		
+			test("isLocalStorageSupported", function() {					
+				ok( ChatBuilderDAO.isLocalStorageSupported());											
+			});
+			
+			test("setData", function() {
+				ChatBuilderDAO.init();
+				
+				localStorage.removeItem( s.DATA_KEY );
+				equal( localStorage.getItem( s.DATA_KEY ), null);
+								
+				ChatBuilderDAO.setData( CHATBUILDER_TEST_DATA );															
+				deepEqual( JSON.parse(localStorage.getItem( s.DATA_KEY )), CHATBUILDER_TEST_DATA );											
+			});
+			
+			test("getData", function() {
+				ChatBuilderDAO.init();
+				
+				localStorage.removeItem( s.DATA_KEY );
+				equal( localStorage.getItem( s.DATA_KEY ), null);
+								
+				ChatBuilderDAO.setData( CHATBUILDER_TEST_DATA );															
+				deepEqual( ChatBuilderDAO.getData(), CHATBUILDER_TEST_DATA );											
+			});
+			
+			test("clearData", function() {
+				ChatBuilderDAO.init();
+				
+				localStorage.removeItem( s.DATA_KEY );
+				equal( localStorage.getItem( s.DATA_KEY ), null);
+				
+				ChatBuilderDAO.clearData();																							
+				deepEqual( JSON.parse(localStorage.getItem( s.DATA_KEY )), s.PURE_DATA);											
+			});
+			
+			test("getIndexOf", function() {
+				var actors = [{id:1, name:"John"}, {id:2, name:"Emily"}];
+				ChatBuilderDAO.init();
+				var data = ChatBuilderDAO.getData();
+				data.actors = actors;
+				ChatBuilderDAO.setData( data );	
+				
+				equal(ChatBuilderDAO.getIndexOf( s.ACTORS_COLLECTION_NAME, actors[0].id ), 0);
+				equal(ChatBuilderDAO.getIndexOf( s.ACTORS_COLLECTION_NAME, actors[1].id ), 1);				
+			});
+			
+			//--UTILS------------------------------------------------
+			test("parseOutgoingLinks", function() {				
+				deepEqual(ChatBuilderDAO.utils.parseOutgoingLinks("1,2,3"), [1,2,3]);
+				deepEqual(ChatBuilderDAO.utils.parseOutgoingLinks(""), []);	
+				deepEqual(ChatBuilderDAO.utils.parseOutgoingLinks(null), []);
+				deepEqual(ChatBuilderDAO.utils.parseOutgoingLinks(), []);
+				deepEqual(ChatBuilderDAO.utils.parseOutgoingLinks([1,2,3]), [1,2,3]);
+			});
+			
+			test("selectDialogues", function() {			
+											
+				var dialogues = [{id:1, isChoice:false}, {id:2, isChoice:true}];
+				ChatBuilderDAO.init();
+				var data = ChatBuilderDAO.getData();
+				data.dialogues = dialogues;
+				ChatBuilderDAO.setData( data );
+				
+				deepEqual( ChatBuilderDAO.getDialogues(), dialogues);	
+				
+				equal( ChatBuilderDAO.utils.selectDialogues( ChatBuilderDAO.getDialogues() ,true)[0].id, 2);
+				equal( ChatBuilderDAO.utils.selectDialogues( ChatBuilderDAO.getDialogues() ,false)[0].id, 1);			
+			});
+			
+			test("getDiagramData", function() {						
+				ChatBuilderDAO.init();									
+				ChatBuilderDAO.setData( CHATBUILDER_TEST_DATA );															
+				deepEqual( JSON.parse(localStorage.getItem( s.DATA_KEY )), CHATBUILDER_TEST_DATA );
+				
+				deepEqual( ChatBuilderDAO.utils.getDiagramData( ChatBuilderDAO.getData() ), CHATBUILDER_GOOGLE_CHART_TEST_DATA );																														
+			});
+																									
+		} // onload
+		</script>				
+	</head>
+	<body>
+		<h1 id="qunit-header">Crafty: ChatBuilder</h1>
+		<h2 id="qunit-banner"></h2>
+		<div id="qunit-testrunner-toolbar"></div>
+		<h2 id="qunit-userAgent"></h2>
+		<ol id="qunit-tests"></ol>
+		<div id="qunit-fixture">test markup, will be hidden</div>
+	</body>
+</html>

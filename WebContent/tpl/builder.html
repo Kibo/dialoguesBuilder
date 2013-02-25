@@ -1,0 +1,211 @@
+<div class="row-fluid">	  
+   <div class="span3">
+     	      
+     	<div class="well dialogue">
+     			<h3>Dialogue</h3>	
+     			
+     				<table class="table table-striped">
+     					<thead>
+     						<tr>
+     							<th>ID</th>
+     							<th>Link</th>
+     							<th>&nbsp;</th>     					
+     						</tr>
+     					</thead>
+     					<tbody>     					     				
+	    					<tr ng-repeat="dialogue in dialogues">
+	    						<td>{{dialogue.id}}</td>
+	    						<td>{{dialogue.outgoingLinks}}</td>	    							    					
+	    						 <td>
+		    						 <button class="btn btn-mini" ng-click="editDialogue(dialogue.id)" type="button"><i class="icon-edit"></i></button>
+		    						 <button class="btn btn-mini" type="button" ng-click="removeDialogue(dialogue.id)"><i class="icon-trash"></i></button>
+	    						 </td>
+	    					</tr> 
+    					</tbody>     				
+    				</table>	
+    				
+    				<hr />	      				      			      
+     			
+     			<form name="dialogForm" ng-submit="addDialogue()">      				      				      			     
+     			<p>
+     				<label>ID:</label>
+    					<input ng-model="dialogue.id" type="text" placeholder="Dialogue ID" required>
+    				</p>
+    				
+    				<p>
+     				<label>Parent ID:</label>
+    					<input ng-model="dialogue.parent" type="text" placeholder="Parent ID">
+    					<span class="help-block">Empty for root dialogue.</span>
+    				</p>
+    				
+    				<p>
+     				<label>Actor:</label>
+     				<select ng-model="dialogue.actor" ng-options="actor.id as actor.name for actor in actors"></select>	      				      			
+    				</p>
+    				
+    				<p>
+     				<label>Conversant:</label>      				
+				<select ng-model="dialogue.conversant" ng-options="actor.id as actor.name for actor in actors"></select>						
+    				</p>
+    				      				      					      	      		      			
+    				<p>
+     				<label>Menu text:</label>
+    					<input ng-model="dialogue.menuText" type="text" placeholder="Menu text">
+    				</p>
+    				
+    				<p>
+     				<label>Dialogue text:</label>
+    					<input ng-model="dialogue.dialogueText" type="text" placeholder="Dialogue text" required>
+    				</p>
+    				
+    				<p>
+     				<label>Outgoing link:</label>
+    					<input ng-model="dialogue.outgoingLinks" type="text" placeholder="Outgoing link">
+    					<span class="help-block">Single number (descendant ID).</span>
+    				</p>
+    				      				      				      		
+    				<p>
+     				<label>Conditions String</label>
+    					<input ng-model="dialogue.conditionsString" type="text" placeholder="Conditions String">
+    					<span class="help-block">Example: this.onlyOnce==true</span>
+    				</p>
+    				
+    				<p>
+     				<label>Code before</label>
+    					<input ng-model="dialogue.codeBefore" type="text" placeholder="Code before">
+    					<span class="help-block">Example: this.onlyOnce=true</span>
+    				</p>
+    				
+    				<p>
+     				<label>Code after</label>
+    					<input ng-model="dialogue.codeAfter" type="text" placeholder="Code after">
+    					<span class="help-block">Example: this.onlyOnce=false</span>
+    				</p>
+    				      				      				    				    				      				     
+    				<p>	      				
+    					<button class="btn btn-block btn-success" type="submit">Add dialog</button>	   
+    				</p>
+    				</form>
+    				      				      				      				      	
+     		</div>
+     			      		
+     		<div class="well choice">
+     			<h3>Choice</h3>
+     			
+     			<table class="table table-striped">
+     					<thead>
+     						<tr>
+     							<th>ID</th>
+     							<th>Links</th>
+     							<th>&nbsp;</th>     					
+     						</tr>
+     					</thead>
+     					<tbody>     					     				
+	    					<tr ng-repeat="choice in choices">
+	    						<td>{{choice.id}}</td>
+	    						<td>{{choice.outgoingLinks}}</td>	    							    					
+	    						 <td>
+		    						 <button class="btn btn-mini" ng-click="editChoice(choice.id)" type="button"><i class="icon-edit"></i></button>
+		    						 <button class="btn btn-mini" type="button" ng-click="removeChoice(choice.id)"><i class="icon-trash"></i></button>
+	    						 </td>
+	    					</tr> 
+    					</tbody> 
+     			</table>	
+     			     			     		
+     			<hr />	      			
+     			
+     			<form name="choiceForm" ng-submit="addChoice()">        			
+      			<p>
+      				<label>Id:</label>
+     					<input ng-model="choice.id" type="text" placeholder="Choice ID" required>      					
+     				</p>
+     				
+     				<p>
+     					<label>Parent Id:</label>
+    						<input ng-model="choice.parent" type="text" placeholder="Parent ID">
+    						<span class="help-block">Empty for root dialogue.</span>
+    					</p>
+      		
+      			<p>
+      				<label>Outgoing links:</label>
+     					<input ng-model="choice.outgoingLinks" type="text" placeholder="Outgoing links" required>
+     					<span class="help-block">Comma separated numbers (descendant ID´s).</span>
+     				</p>
+     				      				      				      		
+     				<p>
+      				<label>Conditions String</label>
+     					<input ng-model="choice.conditionsString" type="text" placeholder="Conditions String">
+     					<span class="help-block">Example: player.has("amulet")</span>
+     				</p>
+     				
+     				<p>
+      				<label>Code before</label>
+     					<input ng-model="choice.codeBefore" type="text" placeholder="Code before">      				
+     				</p>
+     				
+     				<p>
+      				<label>Code after</label>
+     					<input ng-model="choice.codeAfter" type="text" placeholder="Code after">      					
+     				</p>
+     				
+     				<p>	      				
+     					<button class="btn btn-block btn-success" type="submit">Add choice</button>
+     				</p>
+     			</form>
+    				      				      				      				      	
+     		</div> <!-- class="choice" -->
+     			      			      			      	      			      			   
+     		<div class="well actor">
+     			<h3>Actors</h3>	
+     			
+     			<table class="table table-striped">
+     					<thead>
+     						<tr>
+     							<th>ID</th>
+     							<th>Name</th>
+     							<th>&nbsp;</th>     					
+     						</tr>
+     					</thead>
+     					<tbody>     					     				
+	    					<tr ng-repeat="actor in actors">
+	    						<td>{{actor.id}}</td>
+	    						<td>{{actor.name}}</td>	    							    					
+	    						 <td>
+		    						 <button class="btn btn-mini" ng-click="editActor(actor.id)" type="button"><i class="icon-edit"></i></button>
+		    						 <button class="btn btn-mini" type="button" ng-click="removeActor(actor.id)"><i class="icon-trash"></i></button>
+	    						 </td>
+	    					</tr> 
+    					</tbody> 
+     			</table>
+     			     			     	
+     			<hr />
+     			      	      			                  	      			  
+     			<form name="actorForm" ng-submit="addActor()">      			
+      			<p>
+      				<label>ID:</label>
+     					<input name="id" type="text" placeholder="Actor ID" ng:model="actor.id" required>	      					
+     				</p>
+      		
+      			<p>
+      				<label>Name:</label>
+     					<input name="name" type="text" placeholder="Actor name" ng:model="actor.name" required>
+     				</p>
+     				<p>	      				
+     					<button class="btn btn-block btn-success" type="submit">Add actor</button>	      				
+     				</p>
+    				</form>  
+    				      				      				      				      	
+     		</div> <!-- class="actors" -->		
+     			      			      		    	
+   </div> <!-- class="span3" -->
+ 
+   <div class="span9">
+   
+    <div class="well diagram">			    	      					      		 	
+    	 <h4>Diagram</h4>    	    		    
+    	 <div id="chartDiagram"></div>
+    	 {{drawDiagram()}} 		    			     				    			   
+    </div> <!-- class="diagrams"  -->
+    	    	   	
+   </div> <!-- class="span9" -->	    
+ </div> <!-- class="row"  -->

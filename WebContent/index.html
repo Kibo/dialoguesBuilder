@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html ng-app="DAOModule">
+  <head>          
+    <meta charset="utf-8">
+    <title>Chat Builder</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Tool for creating dialogs for video games.">             
+    <link href="css/application.css" rel="stylesheet" media="screen">       
+  </head>
+  <body ng:controller="BuilderController">
+        
+  <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+         <div class="container-fluid">
+          <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="brand" href="#builder">Chat Builder for video games</a>
+          <div class="nav-collapse collapse">
+            <ul class="nav">	            	                                     
+            	<li><a href="#builder">Builder</a></li> 
+              	<li><a href="#builder" ng-click="clear()">New chat</a></li>
+				<li><a href="#export">Export</a></li>
+				<li><a href="#import">Import</a></li>
+            </ul>
+            
+             <ul class="nav pull-right">             	                                  
+              <li><a href="#documentation">Documentation</a></li>              
+              <li><a href="#contact">Contact</a></li>
+             </ul>
+            
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+        
+    <div class="container-fluid">      
+    	<div ng-view></div>       	    	     
+  	</div> <!-- class="container-fluid" -->
+  	
+  	<script type='text/javascript' src='https://www.google.com/jsapi'></script>
+    <script type='text/javascript'>
+    	google.load('visualization', '1', {packages:['orgchart']});    	
+    </script>
+  	
+  	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular.min.js"></script>
+  	<script src="js/chatBuilderDAO.js"></script>  	
+    <script src="js/angular/script.js"></script>
+                                                     
+  </body>
+</html>
