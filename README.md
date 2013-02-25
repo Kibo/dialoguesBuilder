@@ -7,7 +7,11 @@ GUI tool for creating interactive dialogue for video games.
 - Interactive dialogue for videogame - part 2
 
 ###Dialogues Builder online
-- [Dialog builder online](#) for game developers
+- [Dialog builder online](http://kibo.github.com/dialoguesBuilder/) for game developers
+
+**Advantage:
+- [documented code](https://github.com/Kibo/dialoguesBuilder/blob/master/WebContent/js/chatBuilderDAO.js)
+- [tested code](https://github.com/Kibo/dialoguesBuilder/blob/master/WebContent/tests/chatBuilderDAO/ChatBuilderDAOTests.html)
 
 **Contact me**
 
