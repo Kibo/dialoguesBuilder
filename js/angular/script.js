@@ -149,11 +149,3 @@ function DocumentationController($scope, $routeParams){
 
 function ContactController($scope, $routeParams){	
 };
-
-
-
-
-
-
-
-
