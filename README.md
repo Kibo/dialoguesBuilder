@@ -13,8 +13,8 @@ GUI tool for creating interactive dialogues for video games.
 - [documented code](https://github.com/Kibo/dialoguesBuilder/blob/master/WebContent/js/chatBuilderDAO.js)
 - [tested code](https://github.com/Kibo/dialoguesBuilder/blob/master/WebContent/tests/chatBuilderDAO/ChatBuilderDAOTests.html)
 
-###Example
-![Dialogues builder](https://raw.github.com/Kibo/dialoguesBuilder/master/WebContent/img/dialogue.png)
+###Screenshot
+[![Dialogues builder](https://raw.github.com/Kibo/dialoguesBuilder/master/WebContent/img/dialogue.png)](http://kibo.github.com/dialoguesBuilder/)
 
 
 
