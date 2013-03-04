@@ -1,4 +1,4 @@
-# Dialogues Builder for video games v0.1.
+# Dialogues Builder for video games v0.2.
 
 GUI tool for creating interactive dialogues for video games.
 
@@ -12,6 +12,9 @@ GUI tool for creating interactive dialogues for video games.
 **Advantage**
 - [documented code](https://github.com/Kibo/dialoguesBuilder/blob/master/WebContent/js/chatBuilderDAO.js)
 - [tested code](https://github.com/Kibo/dialoguesBuilder/blob/master/WebContent/tests/chatBuilderDAO/ChatBuilderDAOTests.html)
+
+**Example**
+![Dialogues builder](https://raw.github.com/Kibo/dialoguesBuilder/master/WebContent/img/dialogue.png)
 
 **Contact me**
 
