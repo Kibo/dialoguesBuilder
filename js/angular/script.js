@@ -85,9 +85,9 @@ function BuilderController($scope, $routeParams, dao){
 			id: parseInt(this.choice.id),
 			parent: parseInt(this.choice.parent),
 			isChoice: true,					
-			conditionsString: this.choice.conditionsString,
-			codeBefore: this.choice.codeBefore,
-			codeAfter: this.choice.codeAfter,
+			conditionsString: this.choice.conditionsString || "",
+			codeBefore: this.choice.codeBefore || "",
+			codeAfter: this.choice.codeAfter || "",
 			outgoingLinks: dao.utils.parseOutgoingLinks( this.choice.outgoingLinks )
 			});	
 		
