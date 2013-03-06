@@ -128,8 +128,8 @@ ChatBuilderDAO = {
     * @method getData 
     * @return {Object} data
     */
-   getData:function(){	  	  
- 	  return JSON.parse( localStorage.getItem( this.settings.DATA_KEY ));
+   getData:function(){	   	   	 
+ 	  return JSON.parse( localStorage.getItem( this.settings.DATA_KEY )); 	  
    },
    
    /**
