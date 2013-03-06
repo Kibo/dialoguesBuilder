@@ -122,26 +122,36 @@ function BuilderController($scope, $routeParams, dao){
 	};	
 };
 
-function ImportController($scope, $routeParams, dao){	
+function ImportController($scope, $routeParams, $location, dao){	
 	
 	/*
 	 * Save JSON to localstorage
 	 */
 	$scope.save = function( elm ){		 	
-         var f = elm.files[0];                                                                  
-         if (f) {
-              var r = new FileReader();                          
-              r.onload = function(e) { 
-            	 dao.setData( JSON.parse( e.target.result));
-            	 window.alert("Import completed.");                           
-              };                           
-              r.readAsText(f);
-          }       
+         var f = elm.files[0];        
+         if (f) {        	         
+		      var r = new FileReader();                          
+		      r.onload = function(e) { 
+		    	  try{
+		    		 dao.setData( JSON.parse( e.target.result));
+		    		 window.alert("Import completed.");
+		    	  }catch(e){		    		  
+	        		  window.alert("Syntax error in your file: " + e.message); 	        		
+	        	  } 
+		      };  
+		      r.onerror = function(err) {
+		          console.log("error", err);
+		          console.log (err.getMessage());		          
+		      };		      
+		      r.readAsText(f);                                  
+         }       
 	};
 };
 
-function ExportController($scope, $routeParams, dao){	
-	$scope.source = JSON.stringify(dao.getData(), null, "\t");	
+function ExportController($scope, $routeParams, dao){		
+	var data = dao.getData();	
+	data.dialogues.sort(function(a, b) {return a.id - b.id;});	
+	$scope.source = JSON.stringify(data, null, "\t");		
 };
 
 function DocumentationController($scope, $routeParams){
